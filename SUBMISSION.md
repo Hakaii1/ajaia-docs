@@ -6,6 +6,7 @@ This document serves as the main guide for evaluating the **Ajaia Docs** assessm
 
 ## 🔗 Live Deployment Details
 - **Live URL**: `https://ajaia-docs-p9r0.onrender.com`
+- **Google Drive Submission Folder**: https://drive.google.com/drive/folders/1OMO39u01JxabzmVKWQA2ZzYwDZf4P1gU?usp=sharing
 - **Seeded Test Accounts** (Switchable instantly in the UI sidebar):
   - **Alice Vance** (`alice`) — Owner of the product roadmap document, has edit access to Bob's onboarding guide.
   - **Bob Smith** (`bob`) — Owner of the engineering onboarding guide, has editor access to Alice's roadmap.
