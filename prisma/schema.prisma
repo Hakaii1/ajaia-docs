@@ -1,0 +1,79 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String     @id
+  name      String
+  email     String     @unique
+  avatarUrl String
+  documents Document[] @relation("UserDocuments")
+  shares    Share[]
+  versions  Version[]
+  comments  Comment[]
+  presences Presence[]
+}
+
+model Document {
+  id        String     @id @default(uuid())
+  title     String
+  content   String     // Stores document contents as HTML string
+  ownerId   String
+  owner     User       @relation("UserDocuments", fields: [ownerId], references: [id], onDelete: Cascade)
+  shares    Share[]
+  versions  Version[]
+  comments  Comment[]
+  presences Presence[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Share {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessLevel String   // "VIEW", "EDIT", or "COMMENT"
+
+  @@unique([documentId, userId])
+}
+
+model Version {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content     String
+  title       String
+  createdAt   DateTime @default(now())
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content     String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quote       String?  // Optional text quote that the comment is linked to
+  createdAt   DateTime @default(now())
+}
+
+model Presence {
+  id          String   @id @default(uuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cursorPos   String?  // Stores JSON string representation of cursor position
+  updatedAt   DateTime @updatedAt
+
+  @@unique([documentId, userId])
+}
