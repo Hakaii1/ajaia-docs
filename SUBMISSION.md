@@ -5,7 +5,7 @@ This document serves as the main guide for evaluating the **Ajaia Docs** assessm
 ---
 
 ## 🔗 Live Deployment Details
-- **Live URL**: `https://ajaia-docs.onrender.com` (or [Reviewer Preferred Path])
+- **Live URL**: `https://ajaia-docs-p9r0.onrender.com`
 - **Seeded Test Accounts** (Switchable instantly in the UI sidebar):
   - **Alice Vance** (`alice`) — Owner of the product roadmap document, has edit access to Bob's onboarding guide.
   - **Bob Smith** (`bob`) — Owner of the engineering onboarding guide, has editor access to Alice's roadmap.
